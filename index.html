@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İsmailcan Sever | Portfolio</title>
+    <style>
+        /* Google Fonts: Poppins */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        /* Color and Style Variables */
+        :root {
+            --primary-color: #00509e;
+            --secondary-color: #003366;
+            --background-color: #f4f7f9;
+            --text-color: #333;
+            --light-text-color: #f8f9fa;
+            --card-bg-color: #ffffff;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+
+        /* Base Reset and Settings */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header and Navigation Menu */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            transition: top 0.3s;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 30px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        /* Hero Section */
+        #home {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh; /* Shortened from 100vh */
+            padding-top: 70px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-text-color);
+            text-align: center;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .hero-img {
+            width: 250px; /* Slightly smaller image */
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow);
+            background-color: #ccc; /* Fallback background color */
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .hero-text .location {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        /* General Section Styles */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-color);
+        }
+
+        /* About Section */
+        #about p {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Experience Section (Timeline) */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-item.left {
+            left: 0;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--card-bg-color);
+            border: 4px solid var(--primary-color);
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-item.right::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: var(--card-bg-color);
+            position: relative;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+        }
+        
+        .timeline-content h3 {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+        }
+        
+        .timeline-content .company {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .timeline-date {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .timeline-content p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* Skills Section */
+        #skills {
+            background-color: #e9eef2;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Changed to 2 columns */
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .skill-category {
+            background-color: var(--card-bg-color);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .skill-category h3 {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-category h3 i {
+            margin-right: 10px;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            margin-bottom: 12px;
+            font-weight: 400;
+        }
+
+        /* Leadership Section */
+        #leadership .container > p {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        /* Education Section */
+        .education-item {
+            background-color: var(--card-bg-color);
+            padding: 30px;
+            margin: 0 auto 20px auto;
+            max-width: 700px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .education-item h3 {
+             color: var(--secondary-color);
+        }
+        
+        .education-item p {
+            margin: 5px 0;
+        }
+        
+        /* Contact Section */
+        #contact {
+             background-color: #e9eef2;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .contact-card {
+            background-color: var(--card-bg-color);
+            padding: 40px 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        .contact-card:hover {
+             transform: translateY(-10px);
+        }
+        .contact-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        .contact-card h3 {
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        .contact-card p {
+            font-size: 1rem;
+        }
+        
+        .contact-card a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-card a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--secondary-color);
+            color: var(--light-text-color);
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* Responsive Design */
+        @media(max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+             .hero-text {
+                text-align: center;
+            }
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            .hero-text .subtitle {
+                font-size: 1.3rem;
+            }
+            .hero-img {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .timeline::after {
+                left: 20px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 60px;
+                padding-right: 10px;
+            }
+            .timeline-item.left, .timeline-item.right {
+                left: 0;
+            }
+            .timeline-item::after {
+                left: 12px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar container">
+            <a href="#home" class="nav-logo">İsmailcan Sever</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#experience" class="nav-link">Experience</a></li>
+                <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="#leadership" class="nav-link">Leadership</a></li>
+                <li class="nav-item"><a href="#education" class="nav-link">Education</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home">
+            <div class="hero-content container">
+                <div class="hero-text">
+                    <h1>İsmailcan Sever</h1>
+                    <p class="subtitle">Geologist / M.Sc. / Manager</p>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> Çan / Çanakkale, Turkey</p>
+                </div>
+                <!-- Corrected and working image link -->
+                <img src="https://lh3.googleusercontent.com/d/1qneeNwoOpVtn-jE1PM5MwU1FdU6OAOZ3" alt="Profile picture of İsmailcan Sever" class="hero-img">
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <p>
+                    With extensive experience in the mining sector and proven managerial expertise, I aim to develop innovative and effective solutions for the projects under my responsibility. My goal is to maximize team performance, enhance operational efficiency, and deliver tangible contributions to the company's growth. By staying abreast of current industry practices and technological advancements, I intend to devise practical strategies to improve production processes and reduce costs.
+                </p>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section">
+            <div class="container">
+                <h2 class="section-title">Work Experience</h2>
+                <div class="timeline">
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>Mineral Exploration Manager</h3>
+                            <p class="company">Kalemaden Ind. Raw Mat. Inc.</p>
+                            <p class="timeline-date">May 2024 - Present | Çanakkale, Turkey</p>
+                            <p>Currently holding a managerial position, overseeing projects in production, exploration, drilling, and resource modeling. Responsible for leading my team, making strategic decisions, and ensuring the successful execution of operational objectives.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Senior Mine Geologist</h3>
+                            <p class="company">ESAN Ind. Raw Mat. Inc.</p>
+                            <p class="timeline-date">June 2023 - May 2024 | Balıkesir, Turkey</p>
+                            <p>Collaborated with colleagues on underground mining projects, achieving significant advancements in the optimization and digitization of production processes, which enhanced operational efficiency and reinforced project management capabilities.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>Chief Exploration Engineer</h3>
+                            <p class="company">ATA Twins Comp. Ltd. (SANKO)</p>
+                            <p class="timeline-date">September 2022 - June 2023 | Ghana, West Africa</p>
+                            <p>Led a small team in a placer gold deposit project, overseeing the establishment of a production facility and implementing resource development strategies. Managed exploration trench excavations and conducted detailed mapping of drainage basins to enhance resource potential understanding.</p>
+                        </div>
+                    </div>
+                     <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Senior Exploration Geologist</h3>
+                            <p class="company">Zenit Mining Inc.</p>
+                            <p class="timeline-date">September 2020 - September 2022 | Balıkesir, Turkey</p>
+                            <p>Managed a team of four, overseeing two drilling rigs in a continuous 24/7 operation. My leadership ensured the seamless execution of exploration programs, enhancing geological mapping and resource evaluation for efficient mine planning.</p>
+                        </div>
+                    </div>
+                     <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>Mine Geologist</h3>
+                            <p class="company">Avesoro Resources INC.</p>
+                            <p class="timeline-date">September 2018 - September 2020 | Burkina Faso, West Africa</p>
+                            <p>Managed grade control operations across five 24/7 active pits. Led efforts that successfully reduced dilution rates from 60% to 10% and increased ore production grade from 1.5 g/t to 2.5 g/t by directing sampling, utilizing Datamine for modeling, and coordinating production maps with the survey team.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Exploration Specialist</h3>
+                            <p class="company">Kalemaden Ind. Raw Mat. Inc.</p>
+                            <p class="timeline-date">February 2016 - September 2018 | Çanakkale, Turkey</p>
+                            <p>Focused on the exploration and formation analysis of industrial raw materials, particularly feldspar and kaolin. Through extensive fieldwork and geochemical sampling, I identified prospective mineral targets, building a strong foundation in geological interpretation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <div class="container">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3><i class="fas fa-gem"></i> Technical Skills</h3>
+                        <ul>
+                            <li>Mine Geology</li>
+                            <li>Exploration Geology</li>
+                            <li>Resource & Reserve Modeling</li>
+                            <li>Drilling Planning & Execution</li>
+                            <li>Geological Mapping</li>
+                            <li>Geochemical & Geophysical Data Interpretation</li>
+                            <li>Ore Control & Production Monitoring</li>
+                            <li>Geotechnical Assessment</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3><i class="fas fa-cogs"></i> Managerial Skills</h3>
+                         <ul>
+                            <li>Field Management & Operational Planning</li>
+                            <li>Data Analysis & Reporting</li>
+                            <li>Team Leadership & Coordination</li>
+                            <li>Project Management & Strategic Planning</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3><i class="fas fa-laptop-code"></i> Software Skills</h3>
+                         <ul>
+                            <li>Datamine Studio RM/EM/UG</li>
+                            <li>QGIS</li>
+                            <li>ArcGIS</li>
+                            <li>NetCAD</li>
+                            <li>NetProMine</li>
+                            <li>CorelDRAW</li>
+                        </ul>
+                    </div>
+                     <div class="skill-category">
+                        <h3><i class="fas fa-language"></i> Languages</h3>
+                        <ul>
+                           <li><strong>English:</strong> C1/C2 (IELTS: 6.5)</li>
+                           <li><strong>French:</strong> A1 (Beginner)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Leadership Section -->
+        <section id="leadership" class="section">
+            <div class="container">
+                <h2 class="section-title">Leadership Experience</h2>
+                <p>
+                    My leadership journey began at university with AIESEC, working on international projects. Professionally, I gained team management experience as a shift supervisor at Esan. In Africa, I led a small team on a gold mining project, building my international leadership credentials. Currently, as Mineral Exploration Manager at Kale Maden, I coordinate production and exploration processes, manage my team, and contribute to strategic decisions, strengthening my capabilities in leadership and project management.
+                </p>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="section">
+            <div class="container">
+                <h2 class="section-title">Education</h2>
+                <div class="education-item">
+                    <h3>Istanbul Technical University</h3>
+                    <p><strong>M.Sc. in Geological Engineering</strong></p>
+                    <p>GPA: 3.14 / 4.00</p>
+                </div>
+                <div class="education-item">
+                    <h3>Istanbul Technical University</h3>
+                    <p><strong>B.Sc. in Geological Engineering</strong></p>
+                    <p>GPA: 2.60 / 4.00</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">Contact</h2>
+                 <div class="contact-grid">
+                     <div class="contact-card">
+                         <i class="fas fa-map-marker-alt"></i>
+                         <h3>Address</h3>
+                         <p>Şehit Mustafa Kaya St. No:130 D:21, Çan / Çanakkale</p>
+                     </div>
+                     <div class="contact-card">
+                         <i class="fas fa-envelope"></i>
+                         <h3>Email</h3>
+                         <p><a href="mailto:ismailcanseveritu@gmail.com">ismailcanseveritu@gmail.com</a></p>
+                     </div>
+                     <div class="contact-card">
+                         <i class="fas fa-phone"></i>
+                         <h3>Phone</h3>
+                         <p><a href="tel:+905321639131">+90 532 163 9131</a></p>
+                     </div>
+                 </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 İsmailcan Sever. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+s
